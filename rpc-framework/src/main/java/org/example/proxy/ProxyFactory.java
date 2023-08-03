@@ -8,6 +8,7 @@ import org.example.register.MapRemoteRegister;
 
 import java.io.IOException;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -23,14 +24,23 @@ public class ProxyFactory {
             // 服务发现
             List<URL> urls = MapRemoteRegister.get(interfaceClass.getName());
             // 负载均衡
-            URL host = LoadBalance.random(urls);
+
             // 服务调用
             String result = null;
-            try {
-                result = httpClient.send(host.getHostname(), host.getPort(), invocation);
-            } catch (Exception e) {
-                // 服务容错，这里可以调用回调函数
-                return "报错了";
+            // 重试机制
+            int max = 3;
+            List<URL> used = new ArrayList<>();
+            while (max-- > 0) {
+                try {
+                    URL host = LoadBalance.random(urls);
+                    urls.remove(host); // 用过的下次不能再用了
+                    result = httpClient.send(host.getHostname(), host.getPort(), invocation);
+                } catch (Exception e) {
+                    if (max > 0) {
+                        continue;
+                    }
+                    return "出错了";
+                }
             }
             return result;
         });
