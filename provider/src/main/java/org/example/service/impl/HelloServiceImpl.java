@@ -1,5 +1,7 @@
 package org.example.service.impl;
 
+import org.example.annotation.RpcService;
+import org.example.common.Message;
 import org.example.service.HelloService;
 
 /***
@@ -7,9 +9,10 @@ import org.example.service.HelloService;
  * @Author zhucui
  * @DateTime 2023/8/3 20:37
  ***/
+@RpcService(group = "hello-service", version = "version1")
 public class HelloServiceImpl implements HelloService {
     @Override
-    public String hello(String msg) {
-        return "implement version1: hello" + msg;
+    public String hello(Message message) {
+        return message.toString();
     }
 }

@@ -11,7 +11,7 @@ import org.example.service.impl.HelloServiceImpl2;
 
 
 /***
- * @Description
+ * @Description 原始的方法：需要自己手动注册服务，比较麻烦
  * @Author zhucui
  * @DateTime 2023/8/3 20:47
  ***/

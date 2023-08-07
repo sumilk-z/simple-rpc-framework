@@ -50,7 +50,5 @@ public class HttpServer {
         } catch (LifecycleException e) {
             e.printStackTrace();
         }
-
-
     }
 }
