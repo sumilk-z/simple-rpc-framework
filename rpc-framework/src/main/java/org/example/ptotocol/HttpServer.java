@@ -43,7 +43,6 @@ public class HttpServer {
         // tomcat的本质是一个servlet容器，接收到所有的请求，都交给dispatcherServlet来处理
         tomcat.addServlet(contextPath, "dispatcher", new DispatcherServlet());
         context.addServletMappingDecoded("/*", "dispatcher");
-
         try {
             tomcat.start();
             tomcat.getServer().await();

@@ -37,7 +37,6 @@ public class HttpServerHandler {
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
-
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

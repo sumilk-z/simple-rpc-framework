@@ -6,7 +6,6 @@ import org.example.loadbalance.LoadBalance;
 import org.example.ptotocol.HttpClient;
 import org.example.register.MapRemoteRegister;
 
-import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  * @DateTime 2023/8/3 22:57
  ***/
 public class ProxyFactory {
-    public static <T> T getProxy(Class interfaceClass, String version) throws IOException {
+    public static <T> T getProxy(Class interfaceClass, String version) {
         Object proxyInstance = Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, (proxy, method, args) -> {
             Invocation invocation = new Invocation(interfaceClass.getName(), version, method.getName(), method.getParameterTypes(), args);
             HttpClient httpClient = new HttpClient();
