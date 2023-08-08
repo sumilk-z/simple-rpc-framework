@@ -26,14 +26,20 @@ public class ExtensionLoader<T> {
      */
     private static final String SERVICE_DIRECTORY = "META-INF/extensions/";
     /**
-     * 类加载器缓存
+     * 根据类缓存类加载器
      */
     private static final Map<Class<?>, ExtensionLoader<?>> EXTENSION_LOADERS = new ConcurrentHashMap<>();
     /**
-     * 类实例对象缓存
+     * 根据类缓存实例对象
      */
     private static final Map<Class<?>, Object> EXTENSION_INSTANCES = new ConcurrentHashMap<>();
+    /**
+     * 根据类名缓存实例对象
+     */
     private final Map<String, Holder<Object>> cachedInstances = new ConcurrentHashMap<>();
+    /**
+     * 根据类名缓存Class对象
+     */
     private final Holder<Map<String, Class<?>>> cachedClasses = new Holder<>();
     /**
      * 要加载的类类型

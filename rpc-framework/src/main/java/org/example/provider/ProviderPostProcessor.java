@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.annotation.RpcService;
 import org.example.common.ServiceMeta;
 import org.example.config.RpcProperties;
+import org.example.register.RegistryFactory;
+import org.example.register.RegistryService;
 import org.example.utils.RpcServiceNameBuilder;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -65,7 +67,8 @@ public class ProviderPostProcessor implements BeanPostProcessor, EnvironmentAwar
                 serviceMeta.setServiceAddr(serverAddress);
                 serviceMeta.setServicePort(rpcProperties.getPort());
                 // 获取注册中心，并注册服务
-
+                RegistryService registryService = RegistryFactory.getRegistryService(rpcProperties.getRegisterType());
+                registryService.registry(serviceMeta);
                 // 缓存到本地
                 rpcServiceCache.put(RpcServiceNameBuilder.buildServiceKey(group, serviceName, version), bean);
                 log.info("register server {} version {} group {}", serviceName, version, group);

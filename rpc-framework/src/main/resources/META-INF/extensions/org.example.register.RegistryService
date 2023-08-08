@@ -1,0 +1,2 @@
+redis=org.example.register.Impl.RedisRegistryServiceImpl
+zk=org.example.register.Impl.ZookeeperRegistryServiceImpl
