@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.common.Message;
 import org.example.proxy.ProxyFactory;
 import org.example.service.HelloService;
 
@@ -32,7 +33,7 @@ public class Consumer {
 
         // 不希望用户自己构造Invocation对象，可以通过Jdk动态代理生成代理对象的模式
         HelloService helloService = ProxyFactory.getProxy(HelloService.class, "2.0");
-        String result = helloService.hello("world");
+        String result = helloService.hello(new Message("hello", "world"));
         System.out.println(result);
 
     }

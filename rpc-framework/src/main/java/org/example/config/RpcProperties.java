@@ -1,7 +1,7 @@
 package org.example.config;
 
 import org.apache.commons.lang.StringUtils;
-import org.example.common.SerializationConstant;
+import org.example.common.constant.SerializationType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -110,7 +110,7 @@ public class RpcProperties {
      */
     public void setSerialization(String serialization) {
         if (StringUtils.isBlank(serialization)) {
-            serialization = SerializationConstant.JSON;
+            serialization = SerializationType.JSON;
         }
         this.serialization = serialization;
     }

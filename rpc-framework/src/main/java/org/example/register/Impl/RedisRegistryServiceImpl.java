@@ -47,7 +47,6 @@ public class RedisRegistryServiceImpl implements RegistryService {
         UUID = java.util.UUID.randomUUID().toString();
         // 心跳检测
         heartbeat();
-
     }
 
     @Override
@@ -83,9 +82,13 @@ public class RedisRegistryServiceImpl implements RegistryService {
         serviceKeySet.remove(serviceKey);
     }
 
+    /**
+     * 销毁所有的服务
+     */
     @Override
     public void destroy() {
-
+        // TODO 清空redis注册中心的所有服务
+        serviceKeySet.clear();
     }
 
     @Override

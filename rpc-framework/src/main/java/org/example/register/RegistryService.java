@@ -1,5 +1,6 @@
 package org.example.register;
 
+import org.example.annotation.SPI;
 import org.example.common.ServiceMeta;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * @Author zhucui
  * @DateTime 2023/8/7 21:24
  ***/
+@SPI
 public interface RegistryService {
     /**
      * 服务注册

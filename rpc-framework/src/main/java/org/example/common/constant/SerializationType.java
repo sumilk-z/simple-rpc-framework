@@ -1,11 +1,11 @@
-package org.example.common;
+package org.example.common.constant;
 
 /***
  * @Description 序列化规则
  * @Author zhucui
  * @DateTime 2023/8/7 20:21
  ***/
-public class SerializationConstant {
+public class SerializationType {
     /**
      * json字符串格式
      */

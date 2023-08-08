@@ -107,7 +107,7 @@ public class ExtensionLoader<T> {
     private T createExtension(String name) {
         Class<?> clazz = getExtensionClasses().get(name);
         if (clazz == null) {
-            throw new RuntimeException("No such extension of name " + name);
+            throw new RuntimeException("No such extension which name is " + name);
         }
         T instance = (T) EXTENSION_INSTANCES.get(clazz);
         if (instance == null) {
@@ -180,17 +180,16 @@ public class ExtensionLoader<T> {
                 }
                 line = line.trim();
                 if (line.length() > 0) {
+                    final int ei = line.indexOf('=');
+                    String name = line.substring(0, ei).trim();
+                    String clazzName = line.substring(ei + 1).trim();
                     try {
-                        final int ei = line.indexOf('=');
-                        String name = line.substring(0, ei).trim();
-                        String clazzName = line.substring(ei + 1).trim();
                         if (name.length() > 0 && clazzName.length() > 0) {
                             Class<?> clazz = classLoader.loadClass(clazzName);
                             extensionClasses.put(name, clazz);
                         }
-
                     } catch (ClassNotFoundException e) {
-                        log.error(e.getMessage());
+                        log.error("ClassNotFoundException: {}={}", name, clazzName);
                         e.printStackTrace();
                     }
                 }

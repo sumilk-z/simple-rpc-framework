@@ -1,0 +1,3 @@
+consistentHash=org.example.loadbalance.Impl.ConsistentHashLoadBalance
+random=org.example.loadbalance.Impl.RandomLoadBalance
+roundRobin=org.example.loadbalance.Impl.RoundRobinLoadBalance

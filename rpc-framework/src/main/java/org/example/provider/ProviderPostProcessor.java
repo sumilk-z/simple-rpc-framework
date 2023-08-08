@@ -16,6 +16,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @ClassName providerPostProcessor
@@ -77,7 +78,7 @@ public class ProviderPostProcessor implements BeanPostProcessor, EnvironmentAwar
                 e.printStackTrace();
             }
         }
-        return null;
+        return bean;
     }
 
     /**
@@ -88,7 +89,7 @@ public class ProviderPostProcessor implements BeanPostProcessor, EnvironmentAwar
     @Override
     public void setEnvironment(Environment environment) {
         String prefix = "rpc.";
-        Integer port = Integer.parseInt(environment.getProperty(prefix + "port"));
+        Integer port = Integer.parseInt(Objects.requireNonNull(environment.getProperty(prefix + "port")));
         String registerAddr = environment.getProperty(prefix + "register-address");
         String registerPsw = environment.getProperty(prefix + "register-password");
         String serialization = environment.getProperty(prefix + "serialization");
@@ -101,5 +102,8 @@ public class ProviderPostProcessor implements BeanPostProcessor, EnvironmentAwar
         properties.setRegisterType(registerType);
         rpcProperties = properties;
         log.info("成功读取provider的配置文件");
+        log.info("【注册中心类型】 {}", registerType);
+        log.info("【注册中心地址】 {}", registerAddr);
+        log.info("【序列化方式】 {}", serialization == null ? "json" : serialization);
     }
 }
